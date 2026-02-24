@@ -11,9 +11,11 @@ const App = () => {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
   const blackRef = useRef(null);
-  const upperStatRef = useRef(null);
-  const lowerStatRef = useRef(null);
+  const upperFirstStatRef = useRef(null);
+  const upperSecondStatRef = useRef(null);
 
+  const lowerFirstStatRef = useRef(null);
+  const lowerSecondStatRef = useRef(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Calculate responsive animation values based on screen width
@@ -21,8 +23,16 @@ const App = () => {
       const startX = vw < 640 ? 60 : vw < 1024 ? 150 : 270;
       const endX = vw < 640 ? 420 : vw < 1024 ? 600 : 1470;
 
-      gsap.set(upperStatRef.current, { opacity: 0 });
-      gsap.set(lowerStatRef.current, { opacity: 0 });
+      // Set initial states
+      gsap.set(
+        [
+          upperFirstStatRef.current,
+          upperSecondStatRef.current,
+          lowerFirstStatRef.current,
+          lowerSecondStatRef.current,
+        ],
+        { opacity: 0, y: 20 }
+      );
 
       //Initial hero animation
       gsap.fromTo(
@@ -47,48 +57,30 @@ const App = () => {
           ease: "power2.out",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 0%",
-            end: "bottom 100%",
+            start: "top top",
+            end: "bottom bottom",
             scrub: true,
-              invalidateOnRefresh: true,
+            invalidateOnRefresh: true,
 
           },
         }
       );
 
-      gsap.to(
-        upperStatRef.current,
-        
-        {
-          opacity: 1,
-          y: 10,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 0%",
-            end: "bottom 100%",
-            scrub: true,
-          },
-        }
-      );
+      const statsTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+          markers: true
+        },
+      });
 
-      // Lower text animation
-      gsap.to(
-        lowerStatRef.current,
-       
-        {
-          opacity: 1,
-          y: 10,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 0%",
-            end: "bottom 100%",
-            scrub: true,
-          },
-        }
-      );
-
+      statsTl
+        .to(upperFirstStatRef.current, { opacity: 1, y: 0 })
+        .to(upperSecondStatRef.current, { opacity: 1, y: 0 })
+        .to(lowerFirstStatRef.current, { opacity: 1, y: 0 })
+        .to(lowerSecondStatRef.current, { opacity: 1, y: 0 });
     }, containerRef); // scope
 
     return () => ctx.revert();
@@ -102,13 +94,13 @@ const App = () => {
     >
 
       {/* Spacer */}
-      <div ref={upperStatRef} style={{ opacity: 0 }} className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[3vh] sm:top-[4vh] md:top-[5vh] w-[95%] sm:w-full px-2 sm:px-0">
+      <div  className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[3vh] sm:top-[4vh] md:top-[5vh] w-[95%] sm:w-full px-2 sm:px-0">
         <div
-          
+
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto"
         >
           {/* Card 1 */}
-          <div className="flex-1 bg-yellow-300 rounded-lg p-2 sm:p-3 text-left">
+          <div ref={upperFirstStatRef} className="flex-1 bg-yellow-300 rounded-lg p-2 sm:p-3 text-left">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               58%
             </h2>
@@ -119,7 +111,7 @@ const App = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="flex-1 bg-black rounded-lg p-2 sm:p-3 text-left border border-gray-200">
+          <div ref={upperSecondStatRef} className="flex-1 bg-black rounded-lg p-2 sm:p-3 text-left border border-gray-200">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">
               23%
             </h2>
@@ -158,13 +150,13 @@ const App = () => {
       </div>
 
       {/* Spacer */}
-      <div ref={lowerStatRef} style={{ opacity: 0 }} className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[60vh] sm:top-[65vh] md:top-[70vh] left-1/2 -translate-x-1/2 w-[95%] sm:w-full px-2 sm:px-0">
+      <div  className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[60vh] sm:top-[65vh] md:top-[70vh] left-1/2 -translate-x-1/2 w-[95%] sm:w-full px-2 sm:px-0">
         <div
-        
+
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto"
         >
           {/* Card 1 */}
-          <div className="flex-1 bg-blue-500 rounded-lg p-2 sm:p-3 text-left">
+          <div ref={lowerFirstStatRef} className="flex-1 bg-blue-500 rounded-lg p-2 sm:p-3 text-left">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               58%
             </h2>
@@ -175,7 +167,7 @@ const App = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="flex-1 bg-orange-500 rounded-lg p-2 sm:p-3 text-left border border-gray-200">
+          <div ref={lowerSecondStatRef} className="flex-1 bg-orange-500 rounded-lg p-2 sm:p-3 text-left border border-gray-200">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               23%
             </h2>
