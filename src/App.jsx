@@ -72,7 +72,6 @@ const App = () => {
           start: "top top",
           end: "bottom bottom",
           scrub: true,
-          markers: true
         },
       });
 
@@ -94,13 +93,13 @@ const App = () => {
     >
 
       {/* Spacer */}
-      <div  className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[3vh] sm:top-[4vh] md:top-[5vh] w-[95%] sm:w-full px-2 sm:px-0">
+      <div className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[3vh] sm:top-[4vh] md:top-[5vh] w-[95%] sm:w-full px-2 sm:px-0">
         <div
 
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto"
         >
           {/* Card 1 */}
-          <div ref={upperFirstStatRef} className="flex-1 bg-yellow-300 rounded-lg p-2 sm:p-3 text-left">
+          <div ref={upperFirstStatRef} style={{ opacity: 0 }} className="flex-1 bg-yellow-300 rounded-lg p-2 sm:p-3 text-left">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               58%
             </h2>
@@ -111,7 +110,7 @@ const App = () => {
           </div>
 
           {/* Card 2 */}
-          <div ref={upperSecondStatRef} className="flex-1 bg-black rounded-lg p-2 sm:p-3 text-left border border-gray-200">
+          <div ref={upperSecondStatRef} style={{ opacity: 0 }} className="flex-1 bg-black rounded-lg p-2 sm:p-3 text-left border border-gray-200">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">
               23%
             </h2>
@@ -150,13 +149,13 @@ const App = () => {
       </div>
 
       {/* Spacer */}
-      <div  className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[60vh] sm:top-[65vh] md:top-[70vh] left-1/2 -translate-x-1/2 w-[95%] sm:w-full px-2 sm:px-0">
+      <div className="h-[30vh] sm:h-[35vh] md:h-[40vh] fixed top-[60vh] sm:top-[65vh] md:top-[70vh] left-1/2 -translate-x-1/2 w-[95%] sm:w-full px-2 sm:px-0">
         <div
 
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl mx-auto"
         >
           {/* Card 1 */}
-          <div ref={lowerFirstStatRef} className="flex-1 bg-blue-500 rounded-lg p-2 sm:p-3 text-left">
+          <div ref={lowerFirstStatRef} style={{ opacity: 0 }} className="flex-1 bg-blue-500 rounded-lg p-2 sm:p-3 text-left">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               58%
             </h2>
@@ -167,7 +166,7 @@ const App = () => {
           </div>
 
           {/* Card 2 */}
-          <div ref={lowerSecondStatRef} className="flex-1 bg-orange-500 rounded-lg p-2 sm:p-3 text-left border border-gray-200">
+          <div ref={lowerSecondStatRef} style={{ opacity: 0 }} className="flex-1 bg-orange-500 rounded-lg p-2 sm:p-3 text-left border border-gray-200">
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black">
               23%
             </h2>
